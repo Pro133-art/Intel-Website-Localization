@@ -12,6 +12,7 @@
     <meta name="theme-color" content="#0c2bd8" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
     
     <!-- Open Graph Meta Tags -->
@@ -362,6 +363,35 @@
       </section>
     </main>
 
+    <!-- Learn More Section -->
+    <div class="container text-center my-5 py-4">
+      <button type="button" class="btn btn-primary btn-lg px-5 py-3" data-bs-toggle="modal" data-bs-target="#videoModal">Learn More</button>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="videoModalLabel">Intel's Future</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="ratio ratio-16x9">
+              <iframe
+                src="https://www.youtube.com/embed/GmLvEz1Qfgk?start=147"
+                title="Intel's Future - Sustainability Milestones"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Subscription Section -->
     <section class="subscription-section" aria-labelledby="subscribe-heading">
       <div class="subscription-container">
@@ -381,41 +411,20 @@
         <form class="subscription-form" id="subscription-form">
           <div class="form-group">
             <label for="email" class="form-label">Email Address</label>
-            <input type="email" id="email" class="form-input" placeholder="you@example.com" required aria-required="true" />
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required aria-required="true" autocomplete="email" />
           </div>
           <div class="form-group">
             <label for="name" class="form-label">Full Name</label>
-            <input type="text" id="name" class="form-input" placeholder="John Doe" aria-required="false" />
+            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" aria-required="false" autocomplete="name" />
           </div>
           <div class="form-group checkbox">
-            <input type="checkbox" id="consent" class="form-checkbox" required aria-required="true" />
+            <input type="checkbox" id="consent" name="consent" class="form-checkbox" required aria-required="true" />
             <label for="consent" class="checkbox-label">I agree to receive updates about Intel's sustainability initiatives</label>
           </div>
           <button type="submit" class="form-submit">Subscribe</button>
         </form>
       </div>
     </div>
-
-    <section class="video-section" aria-labelledby="video-heading">
-      <h2 id="video-heading" class="section-title">Intel's Future</h2>
-      <a
-        class="video-card"
-        href="https://www.youtube.com/watch?v=GmLvEz1Qfgk&t=147s"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://img.youtube.com/vi/GmLvEz1Qfgk/hqdefault.jpg"
-          alt="Video preview: Intel Sustainability Milestones"
-          loading="lazy"
-          decoding="async"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer-when-downgrade"
-          width="480"
-          height="360"
-        />
-      </a>
-    </section>
 
     <!-- Footer for page context -->
     <footer role="contentinfo">
@@ -452,13 +461,13 @@
           if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
           }
-        });
+        }, { passive: true });
 
         form.addEventListener('submit', (e) => {
           e.preventDefault();
           const email = document.getElementById('email').value;
           const name = document.getElementById('name').value;
-          console.log('Subscription submitted:', { email, name });
+          // Subscription data would be sent to backend in production
           alert(`Thank you for subscribing, ${name || 'friend'}! Check your email for confirmation.`);
           form.reset();
           closeModal();
@@ -523,11 +532,9 @@
           if (enable) {
             htmlElement.setAttribute('dir', 'rtl');
             bodyElement.classList.add('rtl-mode');
-            console.log('RTL mode enabled');
           } else {
             htmlElement.setAttribute('dir', 'ltr');
             bodyElement.classList.remove('rtl-mode');
-            console.log('RTL mode disabled');
           }
         }
 
@@ -661,22 +668,32 @@
           preserveLayoutIntegrity();
           
           // Check periodically for Google Translate changes (fallback)
-          setInterval(() => {
-            const currentDir = document.documentElement.getAttribute('dir');
-            const bodyClasses = document.body.className;
-            
-            // If Google Translate has changed something, recheck
-            if (bodyClasses.includes('translated-')) {
-              detectAndApplyDirection();
+          // Only run if translation is detected to minimize performance impact
+          let translationCheckInterval;
+          const startTranslationMonitoring = () => {
+            if (!translationCheckInterval) {
+              translationCheckInterval = setInterval(() => {
+                const bodyClasses = document.body.className;
+                
+                // If Google Translate has changed something, recheck
+                if (bodyClasses.includes('translated-')) {
+                  detectAndApplyDirection();
+                  preserveLayoutIntegrity();
+                } else if (translationCheckInterval) {
+                  // Stop interval if translation is not active
+                  clearInterval(translationCheckInterval);
+                  translationCheckInterval = null;
+                }
+              }, 2000); // Increased interval to reduce CPU usage
             }
-            
-            // Maintain layout integrity
-            preserveLayoutIntegrity();
-          }, 1000);
-        });
-
-        // Run layout preservation more frequently during translation
-        setInterval(preserveLayoutIntegrity, 500);
+          };
+          
+          // Start monitoring only if translation signs are detected
+          if (document.body.className.includes('translated-') || 
+              document.querySelector('.goog-te-banner-frame')) {
+            startTranslationMonitoring();
+          }
+        }, { passive: true });
 
         // Expose functions globally for manual triggering if needed
         window.detectAndApplyDirection = detectAndApplyDirection;
