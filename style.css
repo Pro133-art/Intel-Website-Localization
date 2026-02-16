@@ -17,6 +17,93 @@
 }
 
 /* =========================
+   RTL Mode Support
+   ========================= */
+/* Apply RTL direction when dir="rtl" is set on html element */
+html[dir="rtl"] body,
+body.rtl-mode {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL adjustments for navigation */
+html[dir="rtl"] nav,
+body.rtl-mode nav {
+  direction: rtl;
+}
+
+html[dir="rtl"] nav a,
+body.rtl-mode nav a {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+html[dir="rtl"] nav a:first-child,
+body.rtl-mode nav a:first-child {
+  margin-right: 0;
+}
+
+/* RTL adjustments for timeline components */
+html[dir="rtl"] .timeline-year,
+body.rtl-mode .timeline-year {
+  text-align: right;
+}
+
+/* RTL adjustments for cards and flex containers */
+html[dir="rtl"] .card,
+html[dir="rtl"] .timeline-card,
+body.rtl-mode .card,
+body.rtl-mode .timeline-card {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL adjustments for lists */
+html[dir="rtl"] ul,
+html[dir="rtl"] ol,
+body.rtl-mode ul,
+body.rtl-mode ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* RTL adjustments for margins and paddings that need flipping */
+html[dir="rtl"] .text-start,
+body.rtl-mode .text-start {
+  text-align: right !important;
+}
+
+html[dir="rtl"] .text-end,
+body.rtl-mode .text-end {
+  text-align: left !important;
+}
+
+/* Ensure buttons and interactive elements work well in RTL */
+html[dir="rtl"] button,
+html[dir="rtl"] a,
+body.rtl-mode button,
+body.rtl-mode a {
+  direction: rtl;
+}
+
+/* Fix for embedded content that shouldn't flip */
+html[dir="rtl"] img,
+html[dir="rtl"] video,
+body.rtl-mode img,
+body.rtl-mode video {
+  direction: ltr;
+}
+
+/* Smooth transition when switching between LTR and RTL */
+html {
+  transition: direction 0.3s ease;
+}
+
+body {
+  transition: direction 0.3s ease, text-align 0.3s ease;
+}
+
+/* =========================
    Base + Layout Defaults
    ========================= */
 * {
@@ -294,8 +381,14 @@ main#overview .timeline-intro .subtitle {
    ========================= */
 main {
   padding: 48px 24px 96px;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+
+main.container-fluid {
+  max-width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .timeline-intro {
@@ -487,16 +580,36 @@ nav a:focus {
    ========================= */
 .timeline {
   --card-gap: 24px;
-  display: flex;
-  gap: var(--card-gap);
   position: relative;
   padding: 18px 4px 22px;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scroll-padding-inline: 12px;
-  scroll-behavior: smooth;
-  scrollbar-color: var(--accent) rgba(11, 47, 70, 0.35);
   perspective: 900px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: var(--card-gap);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(7, 18, 30, 0.3);
+}
+
+.timeline::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timeline::-webkit-scrollbar-track {
+  background: rgba(7, 18, 30, 0.3);
+  border-radius: 4px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(102, 246, 255, 0.4);
+}
+
+.timeline::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-deep);
 }
 
 .timeline::before {
@@ -508,14 +621,16 @@ nav a:focus {
   height: 2px;
   background: linear-gradient(90deg, var(--accent) 0%, rgba(102, 246, 255, 0.1) 100%);
   box-shadow: 0 0 12px rgba(102, 246, 255, 0.35);
+  z-index: 0;
 }
 
 .timeline-card {
   position: relative;
-  flex: 0 0 270px;
-  width: 270px;
   padding: 20px 22px 78px;
   min-height: 420px;
+  width: calc(25% - var(--card-gap) * 0.75);
+  min-width: 280px;
+  flex-shrink: 0;
   border-radius: 6px;
   border: 1px solid var(--card-border);
   background: linear-gradient(160deg, rgba(7, 18, 30, 0.72) 0%, rgba(7, 18, 30, 0.6) 55%, rgba(9, 28, 48, 0.58) 100%);
@@ -523,12 +638,12 @@ nav a:focus {
   backdrop-filter: blur(14px);
   overflow: hidden;
   transform: translateY(10px);
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
   transition: transform 0.45s ease, box-shadow 0.45s ease;
   animation: fade-in 0.7s ease-out both, float 6s ease-in-out infinite;
   contain: layout style paint;
   content-visibility: auto;
+  scroll-snap-align: start;
+  z-index: 1;
 }
 
 .timeline-card:nth-child(odd) {
@@ -842,6 +957,11 @@ nav a:focus {
     --card-gap: 28px;
   }
 
+  .timeline.row {
+    --bs-gutter-x: var(--card-gap);
+    --bs-gutter-y: var(--card-gap);
+  }
+
   .timeline-card {
     padding: 26px 30px 96px;
   }
@@ -853,14 +973,13 @@ nav a:focus {
 
 @media (min-width: 1200px) {
   .timeline-card {
-    flex: 0 0 calc((100% - (var(--card-gap) * 3)) / 4);
-    width: auto;
+    /* Bootstrap will handle column widths */
   }
 }
 
 @media (max-width: 900px) {
   .timeline-card {
-    flex-basis: calc((100% - var(--card-gap)) / 2);
+    /* Bootstrap will handle column widths */
   }
 }
 
@@ -892,31 +1011,24 @@ nav a:focus {
 
   .timeline {
     --card-gap: clamp(16px, 4vw, 22px);
-    flex-direction: column;
     padding: clamp(14px, 3vw, 18px) 6px clamp(18px, 4vw, 24px);
-    overflow: visible;
-    scroll-snap-type: none;
-    max-height: none;
+  }
+
+  .timeline.row {
+    --bs-gutter-x: var(--card-gap);
+    --bs-gutter-y: var(--card-gap);
   }
 
   .timeline::before {
-    top: 0;
-    bottom: 0;
-    left: 12px;
-    width: 2px;
-    height: auto;
-    background: linear-gradient(180deg, var(--accent) 0%, rgba(102, 246, 255, 0.1) 100%);
+    display: none;
   }
 
   .timeline-card::before {
-    left: 6px;
-    top: 20px;
+    display: none;
   }
 
   .timeline-card {
-    flex: 0 0 auto;
-    width: 100%;
-    scroll-snap-align: start;
+    margin-bottom: var(--card-gap);
   }
 
   .timeline-media {
