@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-
 /* =========================
    Theme Tokens
    ========================= */
@@ -141,7 +139,6 @@ h1 {
   text-shadow: 0 0 0 rgba(102, 246, 255, 0);
   animation: pop-glow 0.78s ease-out forwards;
   animation-delay: calc(var(--i) * 0.06s);
-  will-change: transform, opacity, text-shadow;
 }
 
 .hero-space {
@@ -405,6 +402,7 @@ header::before {
   clip-path: ellipse(88% 74% at 8% 50%);
   transform-origin: 8% 50%;
   animation: crest-fold 12s ease-in-out infinite;
+  will-change: transform;
 }
 
 .header-layers::before,
@@ -529,6 +527,8 @@ nav a:focus {
   scroll-snap-stop: always;
   transition: transform 0.45s ease, box-shadow 0.45s ease;
   animation: fade-in 0.7s ease-out both, float 6s ease-in-out infinite;
+  contain: layout style paint;
+  content-visibility: auto;
 }
 
 .timeline-card:nth-child(odd) {
