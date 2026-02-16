@@ -17,6 +17,110 @@
 }
 
 /* =========================
+   Google Translate Compatibility
+   ========================= */
+/* Prevent Google Translate from breaking layout */
+/* Google Translate wraps content in <font> tags - normalize them */
+font {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  background: inherit !important;
+  display: inline !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  vertical-align: inherit !important;
+}
+
+/* Ensure Google Translate doesn't break flexbox layouts */
+.timeline font,
+.hero-letters font,
+.hero-line font,
+nav font {
+  display: inline !important;
+  flex: none !important;
+}
+
+/* Protect inline-block elements from Google Translate disruption */
+.hero-title font,
+.hero-letter font,
+.intel-mark font {
+  display: inline !important;
+  transform: none !important;
+  animation: inherit !important;
+  opacity: inherit !important;
+}
+
+/* Ensure Google Translate widget doesn't overlap content */
+.skiptranslate,
+.goog-te-banner-frame,
+.goog-te-gadget {
+  z-index: 9999 !important;
+  position: fixed !important;
+}
+
+/* Hide Google Translate banner frame spacing */
+body {
+  top: 0 !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+/* Prevent text overflow when languages expand text length */
+.timeline-card,
+.card,
+.hero,
+.timeline-intro {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Maintain spacing in translated hero letters */
+.hero-letter font,
+.hero-space font {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Preserve card layout during translation */
+.timeline-card font {
+  display: inline !important;
+  max-width: 100%;
+}
+
+/* Handle translated navigation links */
+nav a font {
+  display: inline-block !important;
+  text-decoration: inherit !important;
+}
+
+/* Prevent Google Translate from breaking animations */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-letter:has(font) {
+    animation: pop-glow 0.78s ease-out forwards;
+    animation-delay: calc(var(--i) * 0.06s);
+  }
+  
+  .intel-mark .hero-letter:has(font) {
+    animation-name: pop-glow, intel-digitize;
+    animation-duration: 0.78s, 1.9s;
+    animation-delay: calc(var(--i) * 0.06s), 0s;
+  }
+}
+
+/* Ensure proper line breaks in hero title during translation */
+.hero-line {
+  white-space: normal !important;
+}
+
+.hero-line font {
+  white-space: inherit !important;
+}
+
+/* =========================
    RTL Mode Support
    ========================= */
 /* Apply RTL direction when dir="rtl" is set on html element */
@@ -47,6 +151,12 @@ body.rtl-mode nav a:first-child {
 html[dir="rtl"] .timeline-year,
 body.rtl-mode .timeline-year {
   text-align: right;
+}
+
+/* RTL adjustments for timeline scroll */
+html[dir="rtl"] .timeline,
+body.rtl-mode .timeline {
+  direction: rtl;
 }
 
 /* RTL adjustments for cards and flex containers */
@@ -92,6 +202,19 @@ html[dir="rtl"] video,
 body.rtl-mode img,
 body.rtl-mode video {
   direction: ltr;
+}
+
+/* RTL: Adjust hero layout for right-to-left text flow */
+html[dir="rtl"] .hero,
+body.rtl-mode .hero {
+  text-align: right;
+}
+
+html[dir="rtl"] .hero-letters,
+html[dir="rtl"] .hero-line,
+body.rtl-mode .hero-letters,
+body.rtl-mode .hero-line {
+  direction: rtl;
 }
 
 /* Smooth transition when switching between LTR and RTL */

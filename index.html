@@ -458,6 +458,39 @@
         }
 
         /**
+         * Preserve layout integrity during Google Translate
+         * Fixes common layout issues caused by Google Translate's DOM modifications
+         */
+        function preserveLayoutIntegrity() {
+          // Reset body top position if Google Translate tries to add margin
+          if (document.body.style.top && document.body.style.top !== '0px') {
+            document.body.style.top = '0';
+          }
+
+          // Ensure flexbox and inline-block displays are preserved
+          const criticalElements = document.querySelectorAll(
+            '.hero-letter, .hero-line, .hero-letters, .timeline, .timeline-card'
+          );
+          
+          criticalElements.forEach(el => {
+            const computed = window.getComputedStyle(el);
+            if (el.classList.contains('hero-letter') || el.classList.contains('hero-letters')) {
+              if (computed.display !== 'inline-block' && computed.display !== 'inline') {
+                el.style.display = 'inline-block';
+              }
+            }
+          });
+
+          // Remove any unwanted Google Translate banners
+          const gtBanners = document.querySelectorAll('.goog-te-banner-frame');
+          gtBanners.forEach(banner => {
+            if (banner && banner.style) {
+              banner.style.display = 'none';
+            }
+          });
+        }
+
+        /**
          * Detect current page language and apply appropriate text direction
          */
         function detectAndApplyDirection() {
@@ -479,15 +512,18 @@
           // If Google Translate has explicitly set direction, use that
           if (translatedRTL) {
             applyRTLMode(true);
+            preserveLayoutIntegrity();
             return;
           } else if (translatedLTR) {
             applyRTLMode(false);
+            preserveLayoutIntegrity();
             return;
           }
           
           // Otherwise check language code
           const shouldBeRTL = isRTLLanguage(currentLang);
           applyRTLMode(shouldBeRTL);
+          preserveLayoutIntegrity();
         }
 
         // Initial check on page load
@@ -540,13 +576,16 @@
 
         observer.observe(document.body, {
           attributes: true,
-          attributeFilter: ['lang', 'class', 'dir'],
+          attributeFilter: ['lang', 'class', 'dir', 'style'],
           childList: true,
           subtree: true
         });
 
         // Also listen for Google Translate widget events if available
         window.addEventListener('load', () => {
+          // Initial layout integrity check
+          preserveLayoutIntegrity();
+          
           // Check periodically for Google Translate changes (fallback)
           setInterval(() => {
             const currentDir = document.documentElement.getAttribute('dir');
@@ -556,11 +595,18 @@
             if (bodyClasses.includes('translated-')) {
               detectAndApplyDirection();
             }
+            
+            // Maintain layout integrity
+            preserveLayoutIntegrity();
           }, 1000);
         });
 
-        // Expose function globally for manual triggering if needed
+        // Run layout preservation more frequently during translation
+        setInterval(preserveLayoutIntegrity, 500);
+
+        // Expose functions globally for manual triggering if needed
         window.detectAndApplyDirection = detectAndApplyDirection;
+        window.preserveLayoutIntegrity = preserveLayoutIntegrity;
       })();
     </script>
     
