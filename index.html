@@ -362,12 +362,39 @@
       </section>
     </main>
 
-    <!-- Footer for page context -->
-    <footer role="contentinfo">
-      <p class="subtitle">
-        <small>&copy; 2026 Intel Corporation. Intel Sustainability Milestones timeline overview.</small>
-      </p>
-    </footer>
+    <!-- Subscription Section -->
+    <section class="subscription-section" aria-labelledby="subscribe-heading">
+      <div class="subscription-container">
+        <h2 id="subscribe-heading" class="subscription-title">Stay Updated on Intel's Sustainability</h2>
+        <p class="subscription-subtitle">Get the latest insights on processor efficiency and environmental initiatives.</p>
+        <button class="subscription-button" id="subscribe-btn" aria-label="Subscribe to Intel sustainability updates">Subscribe Now</button>
+      </div>
+    </section>
+
+    <!-- Subscription Modal -->
+    <div class="subscription-modal" id="subscription-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-overlay" id="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close" aria-label="Close subscription form">&times;</button>
+        <h2 id="modal-title" class="modal-title">Join Our Sustainability Community</h2>
+        <p class="modal-subtitle">Receive quarterly updates on Intel's environmental innovation and efficiency milestones.</p>
+        <form class="subscription-form" id="subscription-form">
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="you@example.com" required aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" class="form-input" placeholder="John Doe" aria-required="false" />
+          </div>
+          <div class="form-group checkbox">
+            <input type="checkbox" id="consent" class="form-checkbox" required aria-required="true" />
+            <label for="consent" class="checkbox-label">I agree to receive updates about Intel's sustainability initiatives</label>
+          </div>
+          <button type="submit" class="form-submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
 
     <section class="video-section" aria-labelledby="video-heading">
       <h2 id="video-heading" class="section-title">Intel's Future</h2>
@@ -390,7 +417,54 @@
       </a>
     </section>
 
+    <!-- Footer for page context -->
+    <footer role="contentinfo">
+      <p class="subtitle">
+        <small>&copy; 2026 Intel Corporation. Intel Sustainability Milestones timeline overview.</small>
+      </p>
+    </footer>
+
     <script defer>
+      // Subscription Modal Handler
+      (function() {
+        const subscribeBtn = document.getElementById('subscribe-btn');
+        const modal = document.getElementById('subscription-modal');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const closeBtn = document.getElementById('modal-close');
+        const form = document.getElementById('subscription-form');
+
+        subscribeBtn.addEventListener('click', () => {
+          modal.classList.add('active');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        });
+
+        function closeModal() {
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+          }
+        });
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('email').value;
+          const name = document.getElementById('name').value;
+          console.log('Subscription submitted:', { email, name });
+          alert(`Thank you for subscribing, ${name || 'friend'}! Check your email for confirmation.`);
+          form.reset();
+          closeModal();
+        });
+      })();
+
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       const heroLetters = Array.from(document.querySelectorAll(".hero-letter"));
 
