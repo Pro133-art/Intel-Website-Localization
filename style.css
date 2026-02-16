@@ -30,6 +30,12 @@ font {
   line-height: inherit !important;
   letter-spacing: inherit !important;
   vertical-align: inherit !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  white-space: normal !important;
+  word-break: inherit !important;
+  overflow-wrap: inherit !important;
 }
 
 /* Ensure Google Translate doesn't break flexbox layouts */
@@ -49,6 +55,23 @@ nav font {
   transform: none !important;
   animation: inherit !important;
   opacity: inherit !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: normal !important;
+}
+
+/* Ensure Google Translate doesn't collapse text in containers */
+.hero font,
+.subtitle font,
+.section-title font,
+.timeline-intro font,
+main font,
+header font {
+  display: inline !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
 }
 
 /* Ensure Google Translate widget doesn't overlap content */
@@ -75,7 +98,41 @@ body {
 .timeline-intro {
   overflow-wrap: break-word;
   word-wrap: break-word;
+  word-break: break-word;
   hyphens: auto;
+}
+
+/* Enhanced text wrapping for all elements */
+body,
+main,
+section,
+header,
+footer,
+h1,
+h2,
+h3,
+p,
+span,
+a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Support for languages without spaces (Chinese, Japanese, Korean, Thai) */
+body {
+  word-break: break-word;
+}
+
+/*Prevent overflow in text-heavy sections */
+.subtitle,
+.overview-text,
+.timeline-card h3,
+.timeline-card p,
+.section-title {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  overflow: visible;
 }
 
 /* Maintain spacing in translated hero letters */
@@ -319,14 +376,22 @@ h1 {
   letter-spacing: 0.02em;
   text-shadow: 0 0 26px rgba(102, 246, 255, 0.28);
   transform: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero-title {
   display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero-letters {
   display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero-line {
@@ -478,6 +543,9 @@ h1 {
   color: #1d5aea;
   text-shadow: 0 0 18px rgba(102, 246, 255, 0.2);
   transform: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .subtitle {
@@ -486,6 +554,9 @@ h1 {
   font-size: clamp(1.05rem, 2.1vw, 1.5rem);
   line-height: 1.7;
   color: var(--ink-muted);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .overview-text {
@@ -506,6 +577,10 @@ main {
   padding: 48px 24px 96px;
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 main.container-fluid {
@@ -516,6 +591,8 @@ main.container-fluid {
 
 .timeline-intro {
   margin-bottom: 45px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .timeline-intro .subtitle {
@@ -523,6 +600,9 @@ main.container-fluid {
   text-align: justify;
   text-justify: inter-word;
   text-align-last: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .video-section {
@@ -569,11 +649,15 @@ footer {
   padding: 0 24px 64px;
   text-align: center;
   color: var(--ink-muted);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 footer .subtitle {
   margin: 0 auto;
   color: #4a86d6;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* =========================
@@ -589,8 +673,10 @@ header {
   gap: 24px;
   padding: 72px 24px 64px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background-color: rgba(16, 55, 180, 0.92);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 header::before {
@@ -649,9 +735,14 @@ header::before {
 
 .hero {
   max-width: 920px;
+  width: 100%;
   position: relative;
   z-index: 2;
   animation: rise 0.9s ease-out both;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .skip-link {
@@ -676,6 +767,7 @@ nav {
   position: relative;
   z-index: 2;
   display: inline-flex;
+  flex-wrap: wrap;
   gap: 20px;
   padding: 10px 18px;
   border-radius: 999px;
@@ -683,6 +775,8 @@ nav {
   background: rgba(8, 20, 34, 0.55);
   backdrop-filter: blur(8px);
   box-shadow: 0 0 18px rgba(102, 246, 255, 0.18);
+  max-width: 95%;
+  justify-content: center;
 }
 
 nav a {
@@ -690,6 +784,9 @@ nav a {
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.02em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 nav a:hover,
@@ -751,6 +848,8 @@ nav a:focus {
   position: relative;
   padding: 20px 22px 78px;
   min-height: 420px;
+  max-height: none;
+  height: auto;
   width: calc(25% - var(--card-gap) * 0.75);
   min-width: 280px;
   flex-shrink: 0;
@@ -759,7 +858,7 @@ nav a:focus {
   background: linear-gradient(160deg, rgba(7, 18, 30, 0.72) 0%, rgba(7, 18, 30, 0.6) 55%, rgba(9, 28, 48, 0.58) 100%);
   box-shadow: 0 22px 50px rgba(5, 20, 28, 0.45), 0 0 24px rgba(102, 246, 255, 0.08);
   backdrop-filter: blur(14px);
-  overflow: hidden;
+  overflow: visible;
   transform: translateY(10px);
   transition: transform 0.45s ease, box-shadow 0.45s ease;
   animation: fade-in 0.7s ease-out both, float 6s ease-in-out infinite;
@@ -767,6 +866,8 @@ nav a:focus {
   content-visibility: auto;
   scroll-snap-align: start;
   z-index: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .timeline-card:nth-child(odd) {
@@ -814,6 +915,10 @@ nav a:focus {
 .timeline-card h3 {
   margin: 12px 0 10px;
   font-size: 1.4rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.4;
 }
 
 .timeline-media {
@@ -856,6 +961,11 @@ nav a:focus {
   transform: translateY(12px);
   transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-height: 140px;
+  overflow-y: auto;
 }
 
 .timeline-card:hover,
@@ -1112,29 +1222,39 @@ nav a:focus {
   }
 
   .hero-line {
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   h1 {
     font-size: clamp(2.1rem, 7.2vw, 3rem);
     letter-spacing: 0.01em;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .subtitle {
     font-size: clamp(1.02rem, 2.8vw, 1.25rem);
+    word-break: break-word;
   }
 
   .overview-text {
     font-size: clamp(0.98rem, 2.6vw, 1.18rem);
+    word-break: break-word;
   }
 
   .timeline-card p {
     font-size: clamp(15px, 3.4vw, 17px);
+    word-break: break-word;
+    max-height: 110px;
   }
 
   .timeline {
     --card-gap: clamp(16px, 4vw, 22px);
     padding: clamp(14px, 3vw, 18px) 6px clamp(18px, 4vw, 24px);
+    flex-direction: column;
+    overflow-x: visible;
   }
 
   .timeline.row {
@@ -1152,10 +1272,18 @@ nav a:focus {
 
   .timeline-card {
     margin-bottom: var(--card-gap);
+    width: 100%;
+    min-width: 100%;
+    height: auto;
   }
 
   .timeline-media {
     height: 150px;
+  }
+
+  .timeline-card h3 {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -1196,6 +1324,9 @@ nav a:focus {
   color: var(--ink);
   margin-bottom: 12px;
   letter-spacing: -0.01em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .subscription-subtitle {
@@ -1203,6 +1334,9 @@ nav a:focus {
   color: var(--ink-muted);
   margin-bottom: 32px;
   line-height: 1.6;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .subscription-button {
@@ -1299,9 +1433,13 @@ body.rtl-mode .subscription-button {
   padding: 40px;
   max-width: 500px;
   width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 25px 60px rgba(102, 246, 255, 0.2),
               0 0 40px rgba(102, 246, 255, 0.1);
   animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .modal-close {
@@ -1337,6 +1475,9 @@ body.rtl-mode .subscription-button {
   color: var(--ink);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .modal-subtitle {
@@ -1344,6 +1485,9 @@ body.rtl-mode .subscription-button {
   color: var(--ink-muted);
   margin-bottom: 28px;
   line-height: 1.5;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .subscription-form {
@@ -1368,6 +1512,8 @@ body.rtl-mode .subscription-button {
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 6px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .form-input {
@@ -1405,6 +1551,9 @@ body.rtl-mode .subscription-button {
   color: var(--ink-muted);
   cursor: pointer;
   line-height: 1.4;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .form-submit {
@@ -1475,16 +1624,20 @@ body.rtl-mode .form-checkbox {
   .modal-content {
     padding: 30px 20px;
     width: 95%;
+    max-height: 85vh;
+    word-break: break-word;
   }
 
   .modal-title {
     font-size: 1.5rem;
     margin-bottom: 6px;
+    word-break: break-word;
   }
 
   .modal-subtitle {
     font-size: 0.9rem;
     margin-bottom: 20px;
+    word-break: break-word;
   }
 
   .subscription-form {
