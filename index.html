@@ -52,6 +52,8 @@
     <!-- Preload critical CSS -->
     <link rel="preload" href="style.css" as="style" />
     <link rel="stylesheet" href="style.css" />
+    <!-- Optional: Load optimized CSS (replace style.css above with this when ready) -->
+    <!-- <link rel="stylesheet" href="style-optimized.css" /> -->
     
     <!-- Deferred Resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -60,8 +62,9 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" /></noscript>
     
-    <!-- Inline critical font fallback to prevent FOIT -->
+    <!-- Inline critical font fallback to prevent FOIT (Flash of Invisible Text) -->
     <style>
+      /* Fallback font stack while Inter loads */
       body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
     </style>
 
@@ -90,27 +93,40 @@
     </script>
   </head>
   <body>
-    <!-- Noscript fallback for accessibility -->
+    <!-- ========================================
+         NON-JAVASCRIPT FALLBACK MESSAGE
+         Displayed when JavaScript is disabled
+         ======================================== -->
     <noscript>
       <div style="padding: 20px; text-align: center; background: #0c2bd8; color: #f7f4ef;">
         <p>This website works best with JavaScript enabled. However, all content is still accessible without it.</p>
       </div>
     </noscript>
     
-    <!-- Skip link for keyboard users -->
+    <!-- ========================================
+         ACCESSIBILITY: SKIP NAVIGATION LINK
+         Allows keyboard users to skip to main content
+         ======================================== -->
     <a class="skip-link" href="#timeline">Skip to timeline</a>
 
-    <!-- Site header with navigation and hero content -->
+    <!-- ========================================
+         SITE HEADER
+         Contains navigation and hero section
+         ======================================== -->
     <header>
-      <!-- Primary navigation for quick jumps -->
-      <nav aria-label="Primary">
+      <!-- Primary navigation menu -->
+      <nav aria-label="Primary Navigation">
         <a href="#overview">Overview</a>
         <a href="#timeline">Timeline</a>
       </nav>
 
+      <!-- Animated background layers (decorative only) -->
       <div class="header-layers" aria-hidden="true"></div>
 
-      <!-- Hero introduction and context for the timeline -->
+      <!-- ========================================
+           HERO SECTION
+           Main page title with animated letters
+           ======================================== -->
       <div class="hero">
         <h1 class="hero-title">
           <!-- Animated hero title letters, split into lines for layout -->
@@ -164,9 +180,15 @@
       </div>
     </header>
 
-    <!-- Main content for the page -->
+    <!-- ========================================
+         MAIN CONTENT AREA
+         Contains timeline intro and timeline cards
+         ======================================== -->
     <main id="overview" class="container-fluid">
-      <!-- Timeline intro section -->
+      <!-- ========================================
+           TIMELINE INTRODUCTION
+           Context and overview of Intel's sustainability journey
+           ======================================== -->
       <section class="timeline-intro" aria-labelledby="timeline-heading">
         <h2 id="timeline-heading" class="section-title">
           Intel Timeline Overview
@@ -185,10 +207,16 @@
         </p>
       </section>
 
-      <!-- Horizontal timeline section -->
+      <!-- ========================================
+           INTERACTIVE TIMELINE
+           Horizontal scrolling timeline with milestone cards
+           ======================================== -->
       <section id="timeline" aria-label="Sustainability timeline">
         <div class="timeline">
-          <!-- Early shift to efficiency-first design goals -->
+          <!-- ========================================
+               TIMELINE CARD: Early 2000s
+               Shift from raw performance to efficiency metrics
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">Early 2000s</div>
             <h3><i class="bi bi-lightning-fill" aria-hidden="true"></i>Focus on Performance per Watt</h3>
@@ -210,7 +238,10 @@
             </p>
           </article>
 
-          <!-- Core microarchitecture improves efficiency per watt -->
+          <!-- ========================================
+               TIMELINE CARD: 2006
+               Core microarchitecture breakthrough
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2006</div>
             <h3><i class="bi bi-cpu-fill" aria-hidden="true"></i>Intel Core Microarchitecture</h3>
@@ -230,7 +261,10 @@
             </p>
           </article>
 
-          <!-- Baseline year for tracking energy efficiency gains -->
+          <!-- ========================================
+               TIMELINE CARD: 2010
+               Establishing baseline for tracking progress
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2010</div>
             <h3><i class="bi bi-graph-up" aria-hidden="true"></i>Baseline Year for Energy Efficiency Tracking</h3>
@@ -250,7 +284,10 @@
             </p>
           </article>
 
-          <!-- Public efficiency targets become core requirements -->
+          <!-- ========================================
+               TIMELINE CARD: 2012
+               Public commitment to efficiency goals
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2012</div>
             <h3><i class="bi bi-target" aria-hidden="true"></i>Formal Energy Efficiency Targets</h3>
@@ -270,7 +307,10 @@
             </p>
           </article>
 
-          <!-- Process node shrinks lower power consumption -->
+          <!-- ========================================
+               TIMELINE CARD: 2014-2019
+               Process node advancements (22nm to 14nm)
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2014-2019</div>
             <h3><i class="bi bi-layers-fill" aria-hidden="true"></i>Process Node Shrinks (22nm to 14nm)</h3>
@@ -290,7 +330,10 @@
             </p>
           </article>
 
-          <!-- 2030 goals link architecture to climate outcomes -->
+          <!-- ========================================
+               TIMELINE CARD: 2020
+               Launch of RISE sustainability initiative
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2020</div>
             <h3><i class="bi bi-rocket-fill" aria-hidden="true"></i>Launch of the 2030 "RISE" Goals</h3>
@@ -310,7 +353,10 @@
             </p>
           </article>
 
-          <!-- Hybrid cores reduce power for lighter workloads -->
+          <!-- ========================================
+               TIMELINE CARD: 2021-Present
+               Hybrid architecture with efficiency cores
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2021-Present</div>
             <h3><i class="bi bi-diagram-3-fill" aria-hidden="true"></i>Hybrid Architecture and Efficiency Cores</h3>
@@ -330,7 +376,10 @@
             </p>
           </article>
 
-          <!-- Efficiency gains tied to net-zero commitments -->
+          <!-- ========================================
+               TIMELINE CARD: 2022
+               Formal alignment with net-zero commitments
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">2022</div>
             <h3><i class="bi bi-leaf-fill" aria-hidden="true"></i>Alignment with Net-Zero Commitments</h3>
@@ -351,7 +400,10 @@
             </p>
           </article>
 
-          <!-- Ongoing optimization for server workloads -->
+          <!-- ========================================
+               TIMELINE CARD: Ongoing
+               Data center optimization efforts
+               ======================================== -->
           <article class="timeline-card">
             <div class="timeline-year">Ongoing</div>
             <h3><i class="bi bi-server" aria-hidden="true"></i>Data Center Processor Optimization</h3>
@@ -375,7 +427,10 @@
       </section>
     </main>
 
-    <!-- Sustainability Milestones Modal -->
+    <!-- ========================================
+         MODAL: SUSTAINABILITY MILESTONES
+         Detailed information about current milestones
+         ======================================== -->
     <div class="sustainability-modal" id="sustainabilityModal" role="dialog" aria-modal="true" aria-labelledby="sustainability-modal-title" aria-hidden="true">
       <div class="modal-overlay"></div>
       <div class="modal-content">
@@ -417,7 +472,10 @@
       </div>
     </div>
 
-    <!-- Video Section with Three Column Layout -->
+    <!-- ========================================
+         LEARN MORE SECTION
+         Three-column layout with video and info cards
+         ======================================== -->
     <section class="learn-more-section" aria-label="Intel's Future - Current Milestones">
       <div class="container-fluid py-5">
         <h2 class="text-center mb-5">Intel's Future</h2>
@@ -489,7 +547,10 @@
       </div>
     </section>
 
-    <!-- Why It Matters Modal -->
+    <!-- ========================================
+         MODAL: WHY IT MATTERS
+         Explains the importance of sustainability goals
+         ======================================== -->
     <div class="why-it-matters-modal" id="whyItMattersModal" role="dialog" aria-modal="true" aria-labelledby="why-it-matters-modal-title" aria-hidden="true">
       <div class="modal-overlay"></div>
       <div class="modal-content">
@@ -526,7 +587,10 @@
       </div>
     </div>
 
-    <!-- Subscription Section -->
+    <!-- ========================================
+         SUBSCRIPTION CALL-TO-ACTION
+         Newsletter signup section
+         ======================================== -->
     <section class="subscription-section" aria-labelledby="subscribe-heading">
       <div class="subscription-container">
         <h2 id="subscribe-heading" class="subscription-title"><i class="bi bi-bell-fill me-2" aria-hidden="true"></i>Stay Updated on Intel's Sustainability</h2>
@@ -535,7 +599,10 @@
       </div>
     </section>
 
-    <!-- Subscription Modal -->
+    <!-- ========================================
+         MODAL: SUBSCRIPTION FORM
+         Email subscription form with validation
+         ======================================== -->
     <div class="subscription-modal" id="subscription-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-overlay" id="modal-overlay"></div>
       <div class="modal-content">
@@ -563,244 +630,25 @@
       </div>
     </div>
 
-    <!-- Footer for page context -->
+    <!-- ========================================
+         FOOTER
+         Copyright and attribution information
+         ======================================== -->
     <footer role="contentinfo">
       <p class="subtitle">
         <small>&copy; 2026 Intel Corporation. Intel Sustainability Milestones timeline overview.</small>
       </p>
     </footer>
 
-    <script>
-      // Subscription Modal Handler - Self-executing to minimize global scope
-      (function() {
-        'use strict';
-        
-        function initSubscriptionModal() {
-          const subscribeBtn = document.getElementById('subscribe-btn');
-          const modal = document.getElementById('subscription-modal');
-          const modalOverlay = document.getElementById('modal-overlay');
-          const closeBtn = document.getElementById('modal-close');
-          const form = document.getElementById('subscription-form');
-          
-          if (!subscribeBtn || !modal) return;
-
-          subscribeBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-              const emailInput = document.getElementById('email');
-              if (emailInput) emailInput.focus();
-            }, 100);
-          });
-
-          const closeModal = () => {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-            if (subscribeBtn) subscribeBtn.focus();
-          };
-
-          if (closeBtn) closeBtn.addEventListener('click', closeModal);
-          if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
-
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-          }, { passive: true });
-
-          if (form) {
-            form.addEventListener('submit', (e) => {
-              e.preventDefault();
-              const emailInput = document.getElementById('email');
-              const consentCheckbox = document.getElementById('consent');
-              
-              if (!emailInput.validity.valid) {
-                emailInput.focus();
-                emailInput.setAttribute('aria-invalid', 'true');
-                return;
-              }
-              
-              if (!consentCheckbox.checked) {
-                consentCheckbox.focus();
-                consentCheckbox.setAttribute('aria-invalid', 'true');
-                return;
-              }
-              
-              emailInput.removeAttribute('aria-invalid');
-              consentCheckbox.removeAttribute('aria-invalid');
-              
-              const email = emailInput.value;
-              const name = document.getElementById('name').value;
-              alert(`Thank you for subscribing, ${name || 'friend'}! Check your email for confirmation.`);
-              form.reset();
-              closeModal();
-            });
-          }
-        }
-
-        // Initialize after DOM is ready
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initSubscriptionModal);
-        } else {
-          initSubscriptionModal();
-        }
-      })();
-
-      // Hero animation restart - only if animations are enabled
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (!prefersReducedMotion.matches) {
-        window.addEventListener("load", () => {
-          const heroLetters = document.querySelectorAll(".hero-letter");
-          if (heroLetters.length > 0) {
-            heroLetters.forEach((letter) => {
-              letter.style.animation = "none";
-              void letter.offsetHeight;
-              letter.style.animation = "";
-            });
-          }
-        }, { once: true, passive: true });
-      }
-    </script>
+    <!-- ========================================
+         JAVASCRIPT
+         All interactive functionality
+         ======================================== -->
     
-    <!-- RTL Language Detection for Google Translate - Optimized -->
-    <script>
-      (function() {
-        'use strict';
-        
-        const RTL_LANGUAGES = ['ar', 'arc', 'dv', 'fa', 'ha', 'he', 'iw', 'ji', 'ps', 'ur', 'yi'];
-        
-        function isRTLLanguage(lang) {
-          return lang && RTL_LANGUAGES.includes(lang.toLowerCase().split('-')[0]);
-        }
-
-        function applyRTLMode(enable) {
-          const htmlElement = document.documentElement;
-          const bodyElement = document.body;
-          
-          htmlElement.setAttribute('dir', enable ? 'rtl' : 'ltr');
-          bodyElement.classList.toggle('rtl-mode', enable);
-        }
-
-        function preserveLayoutIntegrity() {
-          if (document.body.style.top && document.body.style.top !== '0px') {
-            document.body.style.top = '0';
-          }
-
-          const gtBanners = document.querySelectorAll('.goog-te-banner-frame');
-          gtBanners.forEach(banner => banner.style.display = 'none');
-        }
-
-        function detectAndApplyDirection() {
-          const htmlElement = document.documentElement;
-          const bodyClasses = document.body.className;
-          
-          if (bodyClasses.includes('translated-rtl')) {
-            applyRTLMode(true);
-          } else if (bodyClasses.includes('translated-ltr')) {
-            applyRTLMode(false);
-          } else {
-            const currentLang = document.body.getAttribute('lang') || htmlElement.getAttribute('lang');
-            applyRTLMode(isRTLLanguage(currentLang));
-          }
-          
-          preserveLayoutIntegrity();
-        }
-
-        // Initialize
-        detectAndApplyDirection();
-
-        // Efficient observer with debouncing
-        let timeout;
-        const observer = new MutationObserver(() => {
-          clearTimeout(timeout);
-          timeout = setTimeout(detectAndApplyDirection, 150);
-        });
-
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ['lang', 'class', 'dir'],
-          subtree: false
-        });
-
-        observer.observe(document.body, {
-          attributes: true,
-          attributeFilter: ['lang', 'class'],
-          subtree: false
-        });
-
-        // Check on load
-        window.addEventListener('load', () => {
-          preserveLayoutIntegrity();
-          
-          if (document.body.className.includes('translated-')) {
-            const interval = setInterval(() => {
-              if (!document.body.className.includes('translated-')) {
-                clearInterval(interval);
-              } else {
-                detectAndApplyDirection();
-                preserveLayoutIntegrity();
-              }
-            }, 3000);
-          }
-        }, { once: true, passive: true });
-
-        window.detectAndApplyDirection = detectAndApplyDirection;
-        window.preserveLayoutIntegrity = preserveLayoutIntegrity;
-      })();
-    </script>
-    
-    <!-- Modal Scripts - Optimized -->
-    <script>
-      (function() {
-        'use strict';
-        
-        function initModal(config) {
-          const { btnId, modalId, closeId } = config;
-          const btn = document.getElementById(btnId);
-          const modal = document.getElementById(modalId);
-          const closeBtn = document.getElementById(closeId);
-          const overlay = modal?.querySelector('.modal-overlay');
-          
-          if (!btn || !modal) return;
-
-          const openModal = () => {
-            modal.classList.add('active');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => closeBtn?.focus(), 100);
-          };
-
-          const closeModal = () => {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = 'auto';
-            btn?.focus();
-          };
-
-          btn.addEventListener('click', openModal, { passive: true });
-          closeBtn?.addEventListener('click', closeModal, { passive: true });
-          overlay?.addEventListener('click', closeModal, { passive: true });
-
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-          }, { passive: true });
-        }
-
-        // Initialize when DOM is ready
-        const init = () => {
-          initModal({ btnId: 'learnMoreBtn', modalId: 'sustainabilityModal', closeId: 'modalClose' });
-          initModal({ btnId: 'learnMoreBtnRight', modalId: 'whyItMattersModal', closeId: 'whyItMattersClose' });
-        };
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', init);
-        } else {
-          init();
-        }
-      })();
-    </script>
-    
-    <!-- Bootstrap JS Bundle (includes Popper) - Async loaded -->
+    <!-- Bootstrap JS Bundle (includes Popper) - Async loaded for Bootstrap components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" async></script>
+
+    <!-- Main application JavaScript - Handles modals, forms, animations, and RTL support -->
+    <script src="script.js"></script>
   </body>
 </html>

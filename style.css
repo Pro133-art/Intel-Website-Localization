@@ -1,41 +1,86 @@
+/**
+ * Intel Sustainability Milestones - Main Stylesheet
+ * 
+ * TABLE OF CONTENTS:
+ * 1. Theme Variables & Configuration
+ * 2. Reset & Base Styles
+ * 3. Typography System
+ * 4. Layout & Structure
+ * 5. Navigation & Header
+ * 6. Hero Section & Animations
+ * 7. Timeline & Cards
+ * 8. Modals & Forms
+ * 9. Subscription Section
+ * 10. Accessibility & Utilities
+ * 11. Internationalization (RTL, Google Translate)
+ * 12. Responsive Design & Media Queries
+ * 13. Performance Optimizations
+ * 
+ * @version 2.0.0
+ * @author Intel Sustainability Team
+ */
+
 /* =========================
-   Theme Tokens
+   1. THEME VARIABLES & CONFIGURATION
+   Design tokens for consistent theming across the application
    ========================= */
 :root {
+  /* Color Scheme */
   color-scheme: light;
+  
+  /* Primary Colors - Text */
   --ink: #f7f4ef;
   --ink-muted: rgba(247, 244, 239, 0.78);
+  
+  /* Brand Colors - Ocean Blues */
   --ocean-1: #0c2bd8;
   --ocean-2: #0b6fd1;
   --ocean-3: #15c1d6;
+  
+  /* Accent Colors - Cyan */
   --accent: #66f6ff;
   --accent-deep: #2cc6ff;
   --glow: rgba(102, 246, 255, 0.45);
+  
+  /* UI Components */
   --card: rgba(7, 18, 30, 0.72);
   --card-border: rgba(102, 246, 255, 0.28);
   --card-sheen: rgba(255, 255, 255, 0.05);
+  
+  /* Spacing System */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* Animation Timing */
+  --animation-fast: 0.2s;
+  --animation-normal: 0.3s;
+  --animation-slow: 0.5s;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
 }
 
 /* =========================
-   Google Translate Compatibility
+   2. RESET & BASE STYLES
+   Foundational styles and browser resets
    ========================= */
-/* Prevent Google Translate from breaking layout */
-/* Google Translate wraps content in <font> tags - normalize them */
-font {
-  font-family: inherit !important;
-  font-size: inherit !important;
-  color: inherit !important;
-  background: inherit !important;
-  display: inline !important;
-  line-height: inherit !important;
-  letter-spacing: inherit !important;
-  vertical-align: inherit !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  white-space: normal !important;
-  word-break: inherit !important;
-  overflow-wrap: inherit !important;
+
+/* Box-sizing for predictable sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margins and improve consistency */
+* {
+  margin: 0;
 }
 
 /* Ensure Google Translate doesn't break flexbox layouts */
@@ -1747,6 +1792,10 @@ body.rtl-mode .subscription-button {
   border-bottom: 1px solid var(--card-border);
 }
 
+.learn-more-section h2 {
+  color: #000000;
+}
+
 .learn-more-section .card {
   background: var(--card);
   border: 1px solid var(--card-border);
@@ -1804,10 +1853,10 @@ body.rtl-mode .subscription-button {
 
 /* Consistently styled Learn More buttons with icons */
 .learn-more-section .learn-more-btn {
-  color: var(--ink);
+  color: #0a1628;
   background-color: var(--accent);
   border-color: var(--accent);
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
@@ -1816,6 +1865,7 @@ body.rtl-mode .subscription-button {
 }
 
 .learn-more-section .learn-more-btn:hover {
+  color: #0a1628;
   background-color: var(--accent-deep);
   border-color: var(--accent-deep);
   transform: translateY(-2px);
