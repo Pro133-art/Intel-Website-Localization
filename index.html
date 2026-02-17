@@ -366,20 +366,57 @@
       </section>
     </main>
 
-    <!-- Learn More Section -->
-    <div class="container text-center my-2 py-4">
-      <button type="button" class="btn btn-primary btn-lg px-5 py-3" id="learnMoreBtn" aria-expanded="false" aria-controls="learnMoreContent">Learn More</button>
+    <!-- Sustainability Milestones Modal -->
+    <div class="sustainability-modal" id="sustainabilityModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <h2 class="modal-title">Current Sustainability-Related Processor Milestones</h2>
+        <div class="modal-body">
+          <section class="milestone-section">
+            <h3>2024 – Intel Xeon 6 with Efficient-Cores</h3>
+            <p>Intel unveiled the Xeon 6 family designed to maximize performance per watt:</p>
+            <ul>
+              <li>~3.8× performance per watt improvement in some workloads</li>
+              <li>~60% reduction in runtime power consumption with power management tools</li>
+            </ul>
+            <p>These gains directly support Intel's energy efficiency goals and help lower electricity use in data centers.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>Generational Power Efficiency Improvements</h3>
+            <p>Intel's recent processors — including 13th–14th Gen Intel Core and 5th Gen Intel Xeon Scalable — deliver significantly higher energy efficiency than prior generations, contributing to the 10× efficiency goal by 2030.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>2030 Product Energy Efficiency Target</h3>
+            <p>Intel reaffirms its goal to increase energy efficiency of client and server microprocessors by <strong>10× by 2030</strong> (relative to 2010). This remains a core benchmark guiding new processor designs and product roadmaps.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>Falcon Shores CPU-GPU Energy Efficiency Goal</h3>
+            <p>Intel plans for a <strong>5× increase in performance per watt</strong> for upcoming CPU-GPU (Falcon Shores), supporting both performance and lower lifecycle emissions.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>2030 Carbon Footprint Reduction</h3>
+            <p>Intel set a goal to reduce the carbon footprint of reference platform designs by <strong>30% by 2030</strong>. This influences how ecosystem partners design systems powered by Intel processors.</p>
+          </section>
+        </div>
+      </div>
     </div>
 
     <!-- Video Section with Three Column Layout -->
-    <section id="learnMoreContent" class="learn-more-section collapse" aria-labelledby="learnMoreBtn">
+    <section class="learn-more-section" aria-label="Intel's Future - Current Milestones">
       <div class="container-fluid py-5">
         <h2 class="text-center mb-5">Intel's Future</h2>
         <div class="row g-4 align-items-center">
           <!-- Left Text Box -->
           <div class="col-12 col-md-4">
-            <div class="card h-100">
-              <div class="card-body">
+            <div class="card h-100 d-flex flex-column">
+              <div class="card-body flex-grow-1">
                 <h5 class="card-title">Current Milestones (2024–2026)</h5>
                 <ul class="card-text-list">
                   <li><strong>Intel Xeon 6 with E-cores</strong> — Performance-per-watt gains and reduced runtime power consumption</li>
@@ -387,6 +424,9 @@
                   <li><strong>Falcon Shores</strong> — Up to 5× efficiency improvement for CPU-GPU products</li>
                   <li><strong>Carbon Footprint Goal</strong> — 2030 reduction targets for reference designs</li>
                 </ul>
+              </div>
+              <div class="card-footer bg-transparent border-top border-card-border">
+                <button class="btn btn-sm btn-outline-primary w-100" id="learnMoreBtn">Learn More</button>
               </div>
             </div>
           </div>
@@ -407,8 +447,8 @@
 
           <!-- Right Text Box -->
           <div class="col-12 col-md-4">
-            <div class="card h-100">
-              <div class="card-body">
+            <div class="card h-100 d-flex flex-column">
+              <div class="card-body flex-grow-1">
                 <h5 class="card-title">Why It Matters</h5>
                 <ul class="card-text-list">
                   <li><strong>Real-World Energy Cuts</strong> — E-cores and power optimization reduce actual power consumption where it counts most—data centers running 24/7</li>
@@ -416,11 +456,51 @@
                   <li><strong>System-Level Impact</strong> — Carbon reduction goals shape the whole platform, from chips to cooling, creating truly sustainable systems</li>
                 </ul>
               </div>
+              <div class="card-footer bg-transparent border-top border-card-border">
+                <button class="btn btn-sm btn-outline-primary w-100" id="learnMoreBtnRight">Learn More</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Why It Matters Modal -->
+    <div class="why-it-matters-modal" id="whyItMattersModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="whyItMattersClose" aria-label="Close modal">
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <h2 class="modal-title">Why Intel's Sustainability Goals Matter</h2>
+        <div class="modal-body">
+          <section class="milestone-section">
+            <h3>The Power Problem (and Solution)</h3>
+            <p>AI, cloud services, and data centers are eating up electricity like never before. Intel's targeting 10× better energy efficiency by 2030 for one simple reason: the same computing work using 90% less power cuts carbon emissions and those massive energy bills customers actually care about. Less power used means less money spent.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>Regulations and Risk</h3>
+            <p>Governments worldwide are tightening the screws on carbon emissions. Big enterprises and government agencies won't partner with suppliers that don't have solid sustainability plans. Intel moving early on this dodges future regulatory headaches and keeps the trust of the customers that matter most.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>Beyond the Factory Gates</h3>
+            <p>Chip manufacturing creates emissions. Using chips creates emissions. So Intel's efficiency push doesn't stop at the factory—it ripples through the entire supply chain, pushing suppliers toward cleaner processes. When millions of devices use less power over their lifetime, that adds up fast and shapes the whole industry's standards.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>Real Operational Wins</h3>
+            <p>Cutting waste, reducing water usage, and improving energy efficiency all lower manufacturing costs and protect the critical resources chip fabs absolutely need. In competitive markets like AI and high-performance computing, raw performance isn't enough—it's performance per watt that wins contracts.</p>
+          </section>
+
+          <section class="milestone-section">
+            <h3>The Bottom Line</h3>
+            <p>These goals reduce environmental harm, lower costs for customers, help Intel sidestep regulatory problems, keep the company competitive, and ensure long-term stability in an industry that demands massive amounts of energy.</p>
+          </section>
+        </div>
+      </div>
+    </div>
 
     <!-- Subscription Section -->
     <section class="subscription-section" aria-labelledby="subscribe-heading">
@@ -464,24 +544,6 @@
     </footer>
 
     <script defer>
-      // Learn More Section Toggle Handler
-      (function() {
-        const learnMoreBtn = document.getElementById('learnMoreBtn');
-        const learnMoreContent = document.getElementById('learnMoreContent');
-
-        learnMoreBtn.addEventListener('click', () => {
-          const isExpanded = learnMoreContent.classList.contains('show');
-          
-          if (isExpanded) {
-            learnMoreContent.classList.remove('show');
-            learnMoreBtn.setAttribute('aria-expanded', 'false');
-          } else {
-            learnMoreContent.classList.add('show');
-            learnMoreBtn.setAttribute('aria-expanded', 'true');
-          }
-        });
-      })();
-
       // Subscription Modal Handler
       (function() {
         const subscribeBtn = document.getElementById('subscribe-btn');
@@ -747,6 +809,82 @@
         window.detectAndApplyDirection = detectAndApplyDirection;
         window.preserveLayoutIntegrity = preserveLayoutIntegrity;
       })();
+    </script>
+    
+    <!-- Sustainability Modal Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const sustainabilityModal = document.getElementById('sustainabilityModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalOverlay = sustainabilityModal.querySelector('.modal-overlay');
+
+        if (learnMoreBtn) {
+          learnMoreBtn.addEventListener('click', function() {
+            sustainabilityModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+
+        if (modalClose) {
+          modalClose.addEventListener('click', function() {
+            sustainabilityModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          });
+        }
+
+        if (modalOverlay) {
+          modalOverlay.addEventListener('click', function() {
+            sustainabilityModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          });
+        }
+
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && sustainabilityModal.classList.contains('active')) {
+            sustainabilityModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          }
+        });
+      });
+    </script>
+
+    <!-- Why It Matters Modal Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const learnMoreBtnRight = document.getElementById('learnMoreBtnRight');
+        const whyItMattersModal = document.getElementById('whyItMattersModal');
+        const whyItMattersClose = document.getElementById('whyItMattersClose');
+        const whyItMattersOverlay = whyItMattersModal.querySelector('.modal-overlay');
+
+        if (learnMoreBtnRight) {
+          learnMoreBtnRight.addEventListener('click', function() {
+            whyItMattersModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+
+        if (whyItMattersClose) {
+          whyItMattersClose.addEventListener('click', function() {
+            whyItMattersModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          });
+        }
+
+        if (whyItMattersOverlay) {
+          whyItMattersOverlay.addEventListener('click', function() {
+            whyItMattersModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          });
+        }
+
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && whyItMattersModal.classList.contains('active')) {
+            whyItMattersModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          }
+        });
+      });
     </script>
     
     <!-- Bootstrap JS Bundle (includes Popper) -->
