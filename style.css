@@ -673,7 +673,7 @@ header {
   gap: 24px;
   padding: 72px 24px 64px;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   background-color: rgba(16, 55, 180, 0.92);
   word-break: break-word;
   overflow-wrap: break-word;
@@ -919,6 +919,25 @@ nav a:focus {
   overflow-wrap: break-word;
   hyphens: auto;
   line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-card h3 .bi {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+h2.section-title .bi {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+h2.subscription-title .bi {
+  font-size: 1.3rem;
+  color: var(--accent);
 }
 
 .timeline-media {
@@ -1604,6 +1623,51 @@ body.rtl-mode .subscription-button {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Learn More Section Styles */
+.learn-more-section {
+  background: linear-gradient(135deg, rgba(12, 43, 216, 0.1) 0%, rgba(21, 193, 214, 0.1) 100%);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  overflow: hidden;
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+
+.learn-more-section.show {
+  max-height: 1200px;
+  padding: 3rem 0;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.learn-more-section .card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.learn-more-section .card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px var(--glow);
+  transform: translateY(-4px);
+}
+
+.learn-more-section .card-title {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.learn-more-section .card-text {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 /* RTL Mode Adjustments for Modal */
