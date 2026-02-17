@@ -367,6 +367,20 @@ body {
       rgba(138, 152, 172, 0.28) 100%
     );
   animation: gradient-shift 18s ease-in-out infinite;
+  will-change: auto;
+}
+
+/* Disable expensive animations on mobile */
+@media (max-width: 768px) {
+  body {
+    animation: none;
+    background: linear-gradient(
+      135deg,
+      rgba(98, 104, 118, 0.56) 0%,
+      rgba(118, 132, 154, 0.4) 45%,
+      rgba(138, 152, 172, 0.28) 100%
+    );
+  }
 }
 
 /* Atmospheric overlays sit behind all content. */
@@ -382,6 +396,15 @@ body::before {
   background-repeat: repeat;
   background-position: 0 0;
   animation: hex-fade 10s ease-in-out infinite;
+  will-change: auto;
+}
+
+/* Disable expensive background animations on mobile */
+@media (max-width: 768px) {
+  body::before {
+    animation: none;
+    opacity: 0.15;
+  }
 }
 
 body::after {
@@ -635,6 +658,7 @@ main {
   box-sizing: border-box;
   word-break: break-word;
   overflow-wrap: break-word;
+  contain: layout style;
 }
 
 main.container-fluid {
@@ -758,7 +782,20 @@ header::before {
   clip-path: ellipse(88% 74% at 8% 50%);
   transform-origin: 8% 50%;
   animation: crest-fold 12s ease-in-out infinite;
-  will-change: transform;
+  will-change: auto;
+}
+
+/* Disable header layer animations on mobile */
+@media (max-width: 768px) {
+  .header-layers {
+    animation: none;
+    opacity: 0.7;
+  }
+  
+  .header-layers::before,
+  .header-layers::after {
+    animation: none;
+  }
 }
 
 .header-layers::before,
@@ -922,6 +959,15 @@ nav a:focus {
   z-index: 1;
   word-break: break-word;
   overflow-wrap: break-word;
+  will-change: auto;
+}
+
+/* Simplify animations on mobile */
+@media (max-width: 768px) {
+  .timeline-card {
+    animation: fade-in 0.5s ease-out both;
+    backdrop-filter: none;
+  }
 }
 
 .timeline-card:nth-child(odd) {
@@ -1756,6 +1802,73 @@ body.rtl-mode .subscription-button {
   border-color: var(--card-border) !important;
 }
 
+/* Consistently styled Learn More buttons with icons */
+.learn-more-section .learn-more-btn {
+  color: var(--ink);
+  background-color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.learn-more-section .learn-more-btn:hover {
+  background-color: var(--accent-deep);
+  border-color: var(--accent-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(102, 246, 255, 0.25);
+}
+
+.learn-more-section .learn-more-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Video card wrapper styling for consistent alignment */
+.video-card-wrapper {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  transition: all 0.3s ease;
+}
+
+.video-card-wrapper:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px var(--glow);
+  transform: translateY(-4px);
+}
+
+/* Responsive adjustments for Learn More section */
+@media (max-width: 576px) {
+  .learn-more-section .card {
+    margin-bottom: 12px;
+  }
+
+  .learn-more-section .card-title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .learn-more-section .card-text-list {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .learn-more-section .card-text-list li {
+    margin-bottom: 10px;
+    padding-left: 16px;
+  }
+
+  .learn-more-section .learn-more-btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
 .learn-more-section .btn-outline-primary {
   color: var(--accent);
   border-color: var(--accent);
@@ -1935,27 +2048,52 @@ body.rtl-mode .form-checkbox {
     font-size: 0.9rem;
   }
 
-  /* Mobile Performance: Disable expensive animations */
-  body {
-    animation: none !important;
+  /* Mobile Performance: Disable expensive visual effects */
+  .modal-content {
+    backdrop-filter: none;
   }
-
-  body::before {
-    animation: none !important;
+  
+  nav {
+    backdrop-filter: none;
+    background: rgba(8, 20, 34, 0.85);
   }
-
-  .intel-mark::before {
-    animation: none !important;
-  }
-
-  .intel-mark::after {
-    animation: none !important;
+  
+  .timeline-card p {
+    backdrop-filter: none;
+    background: rgba(7, 18, 30, 0.9);
   }
 }
 
 /* =========================
    Mobile Performance Optimizations
    ========================= */
+/* Reduce paint complexity on mobile */
+@media (max-width: 768px) {
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Simplify shadows on mobile */
+  .timeline-card {
+    box-shadow: 0 8px 20px rgba(5, 20, 28, 0.3);
+  }
+  
+  .timeline-card:hover,
+  .timeline-card:focus-within {
+    box-shadow: 0 12px 30px rgba(5, 20, 28, 0.4);
+  }
+  
+  /* Remove will-change to reduce memory usage */
+  body,
+  .header-layers,
+  .timeline-card {
+    will-change: auto;
+  }
+}
+
 /* Simplify hero animations on mobile for better performance */
 @media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
   .hero-letter:has(font) {
@@ -1964,5 +2102,11 @@ body.rtl-mode .form-checkbox {
 
   .intel-mark .hero-letter:has(font) {
     animation: pop-glow 0.65s ease-out forwards !important;
+  }
+  
+  /* Disable complex Intel animations on mobile */
+  .intel-mark::before,
+  .intel-mark::after {
+    display: none;
   }
 }
