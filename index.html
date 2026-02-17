@@ -367,13 +367,13 @@
     </main>
 
     <!-- Sustainability Milestones Modal -->
-    <div class="sustainability-modal" id="sustainabilityModal">
+    <div class="sustainability-modal" id="sustainabilityModal" role="dialog" aria-modal="true" aria-labelledby="sustainability-modal-title" aria-hidden="true">
       <div class="modal-overlay"></div>
       <div class="modal-content">
-        <button class="modal-close" id="modalClose" aria-label="Close modal">
-          <i class="bi bi-x-lg"></i>
+        <button class="modal-close" id="modalClose" aria-label="Close sustainability milestones modal">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
         </button>
-        <h2 class="modal-title">Current Sustainability-Related Processor Milestones</h2>
+        <h2 class="modal-title" id="sustainability-modal-title">Current Sustainability-Related Processor Milestones</h2>
         <div class="modal-body">
           <section class="milestone-section">
             <h3>2024 – Intel Xeon 6 with Efficient-Cores</h3>
@@ -426,7 +426,7 @@
                 </ul>
               </div>
               <div class="card-footer bg-transparent border-top border-card-border">
-                <button class="btn btn-sm btn-outline-primary w-100" id="learnMoreBtn">Learn More</button>
+                <button class="btn btn-sm btn-outline-primary w-100" id="learnMoreBtn" aria-label="Learn more about current sustainability milestones">Learn More</button>
               </div>
             </div>
           </div>
@@ -436,11 +436,13 @@
             <div class="ratio ratio-16x9">
               <iframe
                 src="https://www.youtube.com/embed/GmLvEz1Qfgk?start=147"
-                title="Intel's Future - Sustainability Milestones"
+                title="Intel's Future - Sustainability Milestones video presentation"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
+                width="560"
+                height="315"
               ></iframe>
             </div>
           </div>
@@ -457,7 +459,7 @@
                 </ul>
               </div>
               <div class="card-footer bg-transparent border-top border-card-border">
-                <button class="btn btn-sm btn-outline-primary w-100" id="learnMoreBtnRight">Learn More</button>
+                <button class="btn btn-sm btn-outline-primary w-100" id="learnMoreBtnRight" aria-label="Learn more about why sustainability matters">Learn More</button>
               </div>
             </div>
           </div>
@@ -466,13 +468,13 @@
     </section>
 
     <!-- Why It Matters Modal -->
-    <div class="why-it-matters-modal" id="whyItMattersModal">
+    <div class="why-it-matters-modal" id="whyItMattersModal" role="dialog" aria-modal="true" aria-labelledby="why-it-matters-modal-title" aria-hidden="true">
       <div class="modal-overlay"></div>
       <div class="modal-content">
-        <button class="modal-close" id="whyItMattersClose" aria-label="Close modal">
-          <i class="bi bi-x-lg"></i>
+        <button class="modal-close" id="whyItMattersClose" aria-label="Close why it matters modal">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
         </button>
-        <h2 class="modal-title">Why Intel's Sustainability Goals Matter</h2>
+        <h2 class="modal-title" id="why-it-matters-modal-title">Why Intel's Sustainability Goals Matter</h2>
         <div class="modal-body">
           <section class="milestone-section">
             <h3>The Power Problem (and Solution)</h3>
@@ -512,26 +514,29 @@
     </section>
 
     <!-- Subscription Modal -->
-    <div class="subscription-modal" id="subscription-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="subscription-modal" id="subscription-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-overlay" id="modal-overlay"></div>
       <div class="modal-content">
-        <button class="modal-close" id="modal-close" aria-label="Close subscription form">&times;</button>
+        <button class="modal-close" id="modal-close" aria-label="Close subscription form"><span aria-hidden="true">&times;</span></button>
         <h2 id="modal-title" class="modal-title">Join Our Sustainability Community</h2>
         <p class="modal-subtitle">Receive quarterly updates on Intel's environmental innovation and efficiency milestones.</p>
         <form class="subscription-form" id="subscription-form">
           <div class="form-group">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required aria-required="true" autocomplete="email" />
+            <label for="email" class="form-label">Email Address <span aria-label="required">*</span></label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required aria-required="true" autocomplete="email" aria-describedby="email-desc" />
+            <span id="email-desc" class="sr-only">Enter your email address to receive sustainability updates</span>
           </div>
           <div class="form-group">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" aria-required="false" autocomplete="name" />
+            <label for="name" class="form-label">Full Name <span class="optional-label">(optional)</span></label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" autocomplete="name" aria-describedby="name-desc" />
+            <span id="name-desc" class="sr-only">Your full name is optional but helps us personalize communications</span>
           </div>
           <div class="form-group checkbox">
-            <input type="checkbox" id="consent" name="consent" class="form-checkbox" required aria-required="true" />
-            <label for="consent" class="checkbox-label">I agree to receive updates about Intel's sustainability initiatives</label>
+            <input type="checkbox" id="consent" name="consent" class="form-checkbox" required aria-required="true" aria-describedby="consent-desc" />
+            <label for="consent" class="checkbox-label">I agree to receive updates about Intel's sustainability initiatives <span aria-label="required">*</span></label>
+            <span id="consent-desc" class="sr-only">You must agree to receive updates to subscribe</span>
           </div>
-          <button type="submit" class="form-submit">Subscribe</button>
+          <button type="submit" class="form-submit" aria-label="Submit subscription form">Subscribe</button>
         </form>
       </div>
     </div>
@@ -556,12 +561,19 @@
           modal.classList.add('active');
           modal.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
+          // Focus the first form field for accessibility
+          setTimeout(() => {
+            const emailInput = document.getElementById('email');
+            if (emailInput) emailInput.focus();
+          }, 100);
         });
 
         function closeModal() {
           modal.classList.remove('active');
           modal.setAttribute('aria-hidden', 'true');
           document.body.style.overflow = '';
+          // Return focus to the button that opened the modal
+          if (subscribeBtn) subscribeBtn.focus();
         }
 
         closeBtn.addEventListener('click', closeModal);
@@ -575,7 +587,27 @@
 
         form.addEventListener('submit', (e) => {
           e.preventDefault();
-          const email = document.getElementById('email').value;
+          const emailInput = document.getElementById('email');
+          const consentCheckbox = document.getElementById('consent');
+          
+          // Validate form fields
+          if (!emailInput.validity.valid) {
+            emailInput.focus();
+            emailInput.setAttribute('aria-invalid', 'true');
+            return;
+          }
+          
+          if (!consentCheckbox.checked) {
+            consentCheckbox.focus();
+            consentCheckbox.setAttribute('aria-invalid', 'true');
+            return;
+          }
+          
+          // Reset validation states
+          emailInput.removeAttribute('aria-invalid');
+          consentCheckbox.removeAttribute('aria-invalid');
+          
+          const email = emailInput.value;
           const name = document.getElementById('name').value;
           // Subscription data would be sent to backend in production
           alert(`Thank you for subscribing, ${name || 'friend'}! Check your email for confirmation.`);
@@ -822,28 +854,42 @@
         if (learnMoreBtn) {
           learnMoreBtn.addEventListener('click', function() {
             sustainabilityModal.classList.add('active');
+            sustainabilityModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            // Focus the close button for accessibility
+            setTimeout(() => {
+              if (modalClose) modalClose.focus();
+            }, 100);
           });
         }
 
         if (modalClose) {
           modalClose.addEventListener('click', function() {
             sustainabilityModal.classList.remove('active');
+            sustainabilityModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto';
+            // Return focus to the button that opened the modal
+            if (learnMoreBtn) learnMoreBtn.focus();
           });
         }
 
         if (modalOverlay) {
           modalOverlay.addEventListener('click', function() {
             sustainabilityModal.classList.remove('active');
+            sustainabilityModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto';
+            // Return focus to the button that opened the modal
+            if (learnMoreBtn) learnMoreBtn.focus();
           });
         }
 
         document.addEventListener('keydown', function(event) {
           if (event.key === 'Escape' && sustainabilityModal.classList.contains('active')) {
             sustainabilityModal.classList.remove('active');
+            sustainabilityModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto';
+            // Return focus to the button that opened the modal
+            if (learnMoreBtn) learnMoreBtn.focus();
           }
         });
       });
@@ -860,28 +906,42 @@
         if (learnMoreBtnRight) {
           learnMoreBtnRight.addEventListener('click', function() {
             whyItMattersModal.classList.add('active');
+            whyItMattersModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            // Focus the close button for accessibility
+            setTimeout(() => {
+              if (whyItMattersClose) whyItMattersClose.focus();
+            }, 100);
           });
         }
 
         if (whyItMattersClose) {
           whyItMattersClose.addEventListener('click', function() {
             whyItMattersModal.classList.remove('active');
+            whyItMattersModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto';
+            // Return focus to the button that opened the modal
+            if (learnMoreBtnRight) learnMoreBtnRight.focus();
           });
         }
 
         if (whyItMattersOverlay) {
           whyItMattersOverlay.addEventListener('click', function() {
             whyItMattersModal.classList.remove('active');
+            whyItMattersModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto';
+            // Return focus to the button that opened the modal
+            if (learnMoreBtnRight) learnMoreBtnRight.focus();
           });
         }
 
         document.addEventListener('keydown', function(event) {
           if (event.key === 'Escape' && whyItMattersModal.classList.contains('active')) {
             whyItMattersModal.classList.remove('active');
+            whyItMattersModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = 'auto';
+            // Return focus to the button that opened the modal
+            if (learnMoreBtnRight) learnMoreBtnRight.focus();
           }
         });
       });
